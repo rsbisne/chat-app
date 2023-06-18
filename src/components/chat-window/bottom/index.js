@@ -11,7 +11,7 @@ function assembleMessage(profile, chatId) {
     author: {
       name: profile.name,
       uid: profile.uid,
-      createdAt: profile.createdAt,
+      createdAt: firebase.database.ServerValue.TIMESTAMP,
       ...(profile.avatar ? { avatar: profile.avatar } : {}),
     },
     createdAt: firebase.database.ServerValue.TIMESTAMP,
@@ -46,7 +46,9 @@ const Bottom = () => {
       ...msgData,
       msgId: messageId,
     };
-
+    console.log(msgData);
+    console.log(messageId);
+    console.log(updates);
     setIsLoading(true);
     try {
       await database.ref().update(updates);
